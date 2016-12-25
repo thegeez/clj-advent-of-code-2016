@@ -99,8 +99,6 @@ rotate column x=1 by 1
     (let [{:keys [wide tall]} (second action)]
       (reduce
        (fn [screen coord]
-         (println "screen " screen)
-         (println "coord" coord)
          (assoc-in screen coord \#))
        screen
        (for [x (range wide)
@@ -139,8 +137,8 @@ rotate column x=1 by 1
     (= out expected)))
 
 (defn day8 []
-  (let [in (slurp (io/resource "day8.txt"))
-        actions (s/conform ::instructions in)
+  (let [in (slurp (io/resource "day8.input" #_"day8.txt"))
+        actions (take 29 (s/conform ::instructions in))
         width 50
         height 6
         out (reduce
@@ -153,8 +151,9 @@ rotate column x=1 by 1
     (doall (map println out))
     res))
 
+(day8)
 (comment
-  (day8) ;=> 123
+  (day8) ;;=> 110 ;=> 123
   ;; code = AFBUPZBJPS
   (s/conform ::instructions t1)
   (s/explain ::instructions t1)
